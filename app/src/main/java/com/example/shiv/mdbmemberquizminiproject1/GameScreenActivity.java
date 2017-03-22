@@ -53,7 +53,7 @@ public class GameScreenActivity extends AppCompatActivity {
         Button button4 = (Button) findViewById(R.id.button5);
         Button endGame = (Button) findViewById(R.id.button6);
         //ImageView img= (ImageView) findViewById(R.id.imageView3);
-        ImageButton imgbutton = (ImageButton) findViewById(R.id.imageButton2);
+        ImageView imgbutton = (ImageView) findViewById(R.id.imageButton2);
 
         TextView scoreText = (TextView)findViewById(R.id.textView);
         scoreText.setText(Integer.toString(score));
@@ -94,11 +94,11 @@ public class GameScreenActivity extends AppCompatActivity {
         if (x < 0.25) {
             correctButton = button1;
             answer = option1;
-        } else if (x >= 0.25 && x < 0.50)
+        } else if (x < 0.50)
         {
             correctButton = button2;
             answer = option4;
-        } else if (x >= 0.50 && x < 0.75) {
+        } else if (x < 0.75) {
             correctButton = button3;
             answer = option2;
         } else {
@@ -112,7 +112,7 @@ public class GameScreenActivity extends AppCompatActivity {
         imgbutton.setImageResource(id);
         //img.setImageResource(id);
 
-        timer = new CountDownTimer(5000, 1000) {
+        timer = new CountDownTimer(6000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 countdown.setText("seconds remaining: " + millisUntilFinished / 1000);
@@ -156,81 +156,17 @@ public class GameScreenActivity extends AppCompatActivity {
         final Button button2 = (Button) findViewById(R.id.button3);
         final Button button3 = (Button) findViewById(R.id.button4);
         final Button button4 = (Button) findViewById(R.id.button5);
-        final ImageButton imgbutton = (ImageButton) findViewById(R.id.imageButton2);
+        final ImageView imgbutton = (ImageView) findViewById(R.id.imageButton2);
 
         Button endGame = (Button) findViewById(R.id.button6);
 
 
 
+        clickButton(button1);
+        clickButton(button2);
+        clickButton(button3);
+        clickButton(button4);
 
-
-        button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if (correctButton != button1) {
-                    Toast toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_SHORT);
-                    toast.show();
-                    reset();
-                }
-                else {
-                    score++;
-                    reset();
-                }
-
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (correctButton != button2) {
-                    Toast toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_SHORT);
-                    toast.show();
-                    reset();
-                }
-                else {
-                    score++;
-                    reset();
-                }
-
-
-            }
-        });
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (correctButton != button3) {
-                    Toast toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_SHORT);
-                    toast.show();
-                    reset();
-                }
-                else {
-                    score++;
-                    reset();
-                }
-
-            }
-        });
-        button4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (correctButton != button4) {
-                    Toast toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_SHORT);
-                    toast.show();
-                    reset();
-                }
-                else {
-                    score++;
-                    reset();
-                }
-
-            }
-        });
 
         endGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -265,4 +201,40 @@ public class GameScreenActivity extends AppCompatActivity {
         });
 
     }
+
+    public void clickButton(final Button button) {
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if (correctButton != button) {
+                    Toast toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_SHORT);
+                    toast.show();
+                    reset();
+                }
+                else {
+                    score++;
+                    reset();
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        timer.start();
+
+    }
+
 }
