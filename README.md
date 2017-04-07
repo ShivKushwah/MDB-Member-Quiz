@@ -10,3 +10,7 @@ Ability to play continuously
 ![Alt text](/Screenshot_20170324-181251.png?raw=true "Screenshot 1")
 
 ![Alt text](/Screenshot_20170324-181304.png?raw=true "Screenshot 2")
+
+Demo Video
+https://youtu.be/IrkybP-rUvY
+
